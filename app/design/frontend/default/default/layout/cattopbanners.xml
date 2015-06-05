@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    <cattopbanners_index_index>
+        <reference name="content">
+            <block type="cattopbanners/cattopbanners" name="cattopbanners" template="cattopbanners/cattopbanners.phtml" />
+        </reference>
+    </cattopbanners_index_index>
+</layout> 

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <cattopbanners_adminhtml_cattopbanners_index>
+        <reference name="content">
+            <block type="cattopbanners/adminhtml_cattopbanners" name="cattopbanners" />
+        </reference>
+    </cattopbanners_adminhtml_cattopbanners_index>
+</layout>
