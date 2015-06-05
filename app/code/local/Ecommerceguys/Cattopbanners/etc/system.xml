@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @category   Mconnect
+ * @package   Ecommerceguys_Cattopbanners
+ * @author     M-Connect Solutions. (http://www.mconnectsolutions.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <tabs>
+        <ecommerceguys_cattopbanners>
+            <label>Ecommerceguys Cattopbanners</label>
+            <sort_order>195</sort_order>
+        </ecommerceguys_cattopbanners>
+    </tabs>
+    <sections>
+          <cattopbanners translate="label" module="cattopbanners">
+            <label>Category Top Banner</label>
+            <tab>ecommerceguys_cattopbanners</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>72</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>                                   
+                    <advbanneradvancedsettings translate="label">
+                    <label>Banner Display Settings</label>
+                    <sort_order>602</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                   <fields>
+                        <advbannerdisplaylabelenabled translate="lable">
+                            <label>Display AdBanner Title Enabled</label>
+                            <comment><![CDATA[ Display Banner with Title. ]]></comment> 
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>47</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </advbannerdisplaylabelenabled>                             
+                        <advbannerimgborderenabled translate="lable">
+                            <label>Banner Border Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>43</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </advbannerimgborderenabled>
+                        <advbannerimgwidth translate="lable">
+                            <label>Banner Width</label>                            
+                            <frontend_type>text</frontend_type>
+                            <sort_order>44</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </advbannerimgwidth>
+                        <advbannerimgheight translate="lable">
+                            <label>Banner Height</label>                            
+                            <frontend_type>text</frontend_type>
+                            <sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </advbannerimgheight>                        
+                        <advbannerdisplayrandomlyenabled translate="lable">
+                            <label>Display Banner Randomly Enabled</label>
+                            <comment><![CDATA[ Display Adv Banner in Random order. If 'yes' then Adv Banner ID wont be followed. ]]></comment> 
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>46</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </advbannerdisplayrandomlyenabled>                        
+                        <advbannerid translate="lable">
+                            <label>Banner ID</label>                            
+                            <frontend_type>text</frontend_type>
+                            <sort_order>47</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </advbannerid>                                                               
+                    </fields>
+                    </advbanneradvancedsettings> 
+		    <advancedcattopbannersblocksettings translate="label">
+                    <label>Banner Block Settings</label>
+                    <sort_order>603</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>                                            
+                    <cattopbannersdisplayleftblockenabled translate="lable">
+                            <label>Display Banner Block in Left Column</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>48</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                    </cattopbannersdisplayleftblockenabled>
+                    <cattopbannersdisplayrightblockenabled translate="lable">
+                            <label>Display Banner Block in Right Column</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>49</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                    </cattopbannersdisplayrightblockenabled>
+                    <cattopbannersdisplaycontentblockenabled translate="lable">
+                            <label>Display Banner Block in Content Area</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                    </cattopbannersdisplaycontentblockenabled>
+                    </fields>
+                    </advancedcattopbannersblocksettings>                                                                                   
+            </groups>
+        </cattopbanners>
+    </sections>
+</config>
