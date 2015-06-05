@@ -1,65 +1,89 @@
-<h4><?php echo $this->__('Module List') ?></h4>
-            <?php
-                
-                /*
-                    This shows how to load specific fields from a record in the database.
-                    1) Note the load(15), this corresponds to saying "select * from table where table_id = 15"
-                    2) You can then just use the get(fieldname) to pull specific data from the table.
-                    3) If you have a field named news_id, then it becomes getNewsId, etc.
-                */
-                /*
-                $news = Mage::getModel('cattopbanners/cattopbanners')->load(15);
-                echo $news->getNewsId();
-                echo $news->getTitle();
-                echo $news->getContent();
-                echo $news->getStatus();
-                */
-                
-                /*
-                    This shows an alternate way of loading datas from a record using the database the "Magento Way" (using blocks and controller).
- 					Uncomment blocks in /app/code/local/Namespace/Module/controllers/IndexController.php if you want to use it.
+<?php
+echo "comes";exit;
+$routeName = Mage::app()->getRequest()->getRouteName();
+$identifier = Mage::getSingleton('cms/page')->getIdentifier();
 
-               */
-                /*
-                $object = $this->getCattopbanners();
-                echo 'id: '.$object['test_id'].'<br/>';
-				echo 'title: '.$object['title'].'<br/>';
-				echo 'content: '.$object['content'].'<br/>';
-				echo 'status: '.$object['status'].'<br/>';
-                */            
-            
-            
-                /*
-                    This shows how to load multiple rows in a collection and save a change to them.
-                    1) The setPageSize function will load only 5 records per page and you can set the current Page with the setCurPage function.
-                    2) The $collection->walk('save') allows you to save everything in the collection after all changes have been made.
-                */
-                /*
-                $i = 0;
-                
-                $collection = Mage::getModel('cattopbanners/cattopbanners')->getCollection();
-                $collection->setPageSize(5);
+$_currPageIdentifier = '';
+$_cattopbannersdisplayConditionField = '';
+if($routeName == 'cms' && $identifier == 'home') {
+$_currPageIdentifier = 'home';
+$_cattopbannersdisplayConditionField = 'poshome';
+} else if(Mage::registry('product')){
+$_currPageIdentifier = 'product';
+$_cattopbannersdisplayConditionField = 'posprod';
+} else if(Mage::registry('current_category')){
+$_currPageIdentifier = 'category';
+$_cattopbannersdisplayConditionField = 'poscat';
+}
+
+$cattopbanners_model = Mage::getModel('cattopbanners/cattopbanners');
+                  
+if(Mage::getStoreConfig('cattopbanners/advbanneradvancedsettings/advbannerdisplayrandomlyenabled',Mage::app()->getStore())) {
+    $collection = $cattopbanners_model->getCollection()
+		->addFieldToFilter($_cattopbannersdisplayConditionField,'1')
+		->addFieldToFilter('status','1')
+		->addFieldToFilter('poscontent','1');
+
+    $collection->getSelect()
+    ->order(new Zend_Db_Expr('RAND()'))
+    ->limit('1');
+} else {    
+    $_advbannerID = Mage::getStoreConfig('cattopbanners/advbanneradvancedsettings/advbannerid',Mage::app()->getStore());
+    $collection = $cattopbanners_model->getCollection()
+		->addFieldToFilter($_cattopbannersdisplayConditionField,'1')
+                ->addFieldToFilter('status','1')
+                ->addFieldToFilter('cattopbanners_id',$_advbannerID)
+		->addFieldToFilter('poscontent','1');
+}
+    
+                //echo $collection->getSelect(); exit;
+                //var_dump($collection->getData());
+                /*$collection->setPageSize(5);
                 $collection->setCurPage(2);
                 $size = $collection->getSize();
-                $cnt = count($collection);
-                foreach ($collection as $item) {
-                    $i = $i+1;
-                    $item->setTitle($i);
-                    echo $item->getTitle();
-                }
+                $cnt = count($collection);*/
+foreach ($collection as $item){ 
+    $_advBannerTitle = '';                   
+    if(Mage::getStoreConfig('cattopbanners/advbanneradvancedsettings/advbannerdisplaylabelenabled',Mage::app()->getStore())){
+        $_advBannerTitle = '<div style="clear:both;">'.$item->getTitle().'</div>';
+    }
+    
+    $styleStr = '';
+    $styleOuterStr = '';
+    $_height = Mage::getStoreConfig('cattopbanners/advbanneradvancedsettings/advbannerimgheight',Mage::app()->getStore());
+    if($_height != '' && is_numeric($_height)){
+       $styleStr = 'max-height:'.$_height.'px;';
+       $styleOuterStr = 'max-height:'.($_height+2).'px;';
+    }
+    
+    $_width = Mage::getStoreConfig('cattopbanners/advbanneradvancedsettings/advbannerimgwidth',Mage::app()->getStore());
+    if($_width != '' && is_numeric($_height)){
+       $styleStr .= 'width:'.$_width.'px;'; 
+       $styleOuterStr .= 'width:'.($_width+2).'px;'; 
+    }
+    
+    $_borderFlag = Mage::getStoreConfig('cattopbanners/advbanneradvancedsettings/advbannerimgborderenabled',Mage::app()->getStore());
+    $_border = '0';
+    if($_borderFlag){
+        $_border = '1';
+        $styleStr .= 'border:1px solid;'; 
+        $styleOuterStr .= 'border:1px solid;'; 
+    }    
+    
+    if($item->getAdvmode() == 0){    
+    echo $_advBannerTitle; 
+?>
+<div style="<?php echo $styleStr; ?>">
+<?php echo $item->getAdvcode(); ?>
+</div>
+<?php         
+    } else if($item->getAdvmode() == 1){    
+?>
+<h2 style="border-bottom:1px solid #CCCCCC;"><?php echo $_advBannerTitle; ?></h2>
+<div style="<?php echo $styleOuterStr; ?>"><a href="<?php echo $item->getBannerlink(); ?>" target="_blank" style="color:#FFF; text-decoration:none;"><img src="<?php echo Mage::getBaseUrl('media').$item->getImgfilename(); ?>" border="<?php echo $_border; ?>" style="<?php echo $styleStr; ?>" alt="<?php echo $item->getTitle(); ?>" title="<?php echo $item->getTitle(); ?>" /></a>
+</div>
 
-                $collection->walk('save');
-                */
-                
-                /*
-                    This shows how to load a single record and save a change.
-                    1) Note the setTitle, this corresponds to the table field name, title, and then you pass it the text to change.
-                    2) Call the save() function only on a single record.
-                */
-                /*
-                $object = Mage::getModel('cattopbanners/cattopbanners')->load(1);
-                $object->setTitle('This is a changed title');
-                $object->save();
-				*/
-
-            ?> 
+<?php    
+    }
+}
+?> 

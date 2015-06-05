@@ -1,4 +1,12 @@
 <?xml version="1.0"?>
+<!--
+/**
+ * @category   Ecommerceguys
+ * @package   Ecommerceguys_Cattopbanners
+ * @author     Ecommerceguys. (http://www.ecommerceguys.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
 <config>
     <modules>
         <Ecommerceguys_Cattopbanners>
@@ -37,14 +45,19 @@
     <adminhtml>
 		<menu>
 			<cattopbanners module="cattopbanners">
-				<title>Cattopbanners</title>
+				<title>Category Top Banners</title>
 				<sort_order>71</sort_order>               
 				<children>
 					<items module="cattopbanners">
-						<title>Manage Items</title>
+						<title>Manage Banner</title>
 						<sort_order>0</sort_order>
 						<action>cattopbanners/adminhtml_cattopbanners</action>
 					</items>
+					<settings module="cattopbanners">
+						<title>Settings</title>
+						<sort_order>1</sort_order>
+						<action>adminhtml/system_config/edit/section/cattopbanners</action>
+					</settings>
 				</children>
 			</cattopbanners>
 		</menu>
@@ -59,6 +72,19 @@
 							<title>Cattopbanners Module</title>
 							<sort_order>10</sort_order>
 						</Ecommerceguys_Cattopbanners>
+                        
+                         <system>
+                         <children>
+                            <config>
+                                <children>
+                                    <cattopbanners translate="title" module="cattopbanners"> 
+                                        <title>cattopbanners - All</title>
+                                    </cattopbanners>
+                                </children>
+                            </config>
+                         </children>
+                        </system>
+                                                
 					</children>
 				</admin>
 			</resources>
@@ -117,4 +143,7 @@
             </cattopbanners>
         </helpers>
     </global>
+    <default>
+    		<cattopbanners><advancedcattopbannersgeneralsettings><cattopbannersenabled>0</cattopbannersenabled></advancedcattopbannersgeneralsettings></cattopbanners>
+    </default>
 </config>
